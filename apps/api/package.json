@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "NODE_OPTIONS='--max-old-space-size=4096' pnpm env:load tsx watch src/http/server.ts",
-    "env:load": "dotend -d ../../.env --",
-    "db:migrate:": "pnpm env:load prisma migrate dev",
+    "env:load": "dotenv -d ../../.env --",
+    "db:migrate": "pnpm env:load prisma migrate dev",
     "db:studio": "pnpm end:load prisma studio"
   },
   "dependencies": {
