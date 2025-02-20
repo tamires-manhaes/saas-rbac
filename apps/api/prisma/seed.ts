@@ -12,12 +12,13 @@ async function seed() {
 
   const user = await prisma.user.create({
     data: {
-      name: 'John Doe',
-      email: 'john@acme.com',
+      name: 'Tamires Pimenta',
+      email: 'tamires@email.com',
       avatarUrl: 'https://github.com/diego3g.png',
       passwordHash,
     },
   })
+
   const anotherUser = await prisma.user.create({
     data: {
       name: faker.person.fullName(),
