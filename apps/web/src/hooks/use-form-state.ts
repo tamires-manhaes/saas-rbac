@@ -1,7 +1,7 @@
 import { FormEvent, useState, useTransition } from 'react'
 
 interface FormState {
-  sucess: boolean
+  success: boolean
   message: string | null
   errors: Record<string, string[]> | null
 }
@@ -14,7 +14,7 @@ export function useFormState(
   const [isPending, startTransition] = useTransition()
 
   const [formState, setFormState] = useState(
-    initialState ?? { sucess: false, message: null, errors: null },
+    initialState ?? { success: false, message: null, errors: null },
   )
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -26,7 +26,7 @@ export function useFormState(
     startTransition(async () => {
       const state = await action(data)
 
-      if (state.sucess === true && onSuccess) {
+      if (state.success === true && onSuccess) {
         await onSuccess()
       }
       setFormState(state)
