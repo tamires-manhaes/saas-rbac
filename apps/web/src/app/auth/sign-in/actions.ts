@@ -7,8 +7,10 @@ import { z } from 'zod'
 import { signInWithPassword } from '@/http/sign-in-with-password'
 
 const signInSchema = z.object({
-  email: z.string().email({ message: 'please provide a valid email address.' }),
-  password: z.string().min(1, { message: 'please provide a password' }),
+  email: z
+    .string()
+    .email({ message: 'Please, provide a valid e-mail address.' }),
+  password: z.string().min(1, { message: 'Please, provide your password.' }),
 })
 
 export async function signInWithEmailAndPassword(data: FormData) {
@@ -16,7 +18,8 @@ export async function signInWithEmailAndPassword(data: FormData) {
 
   if (!result.success) {
     const errors = result.error.flatten().fieldErrors
-    return { sucess: false, message: null, errors }
+
+    return { success: false, message: null, errors }
   }
 
   const { email, password } = result.data
@@ -27,22 +30,25 @@ export async function signInWithEmailAndPassword(data: FormData) {
       password,
     })
 
-    ;(await cookies()).set('token', token, {
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+    await cookies().then((c) => {
+      c.set('token', token, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 7days
+      })
     })
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json()
-      return { sucess: false, message, errors: null }
-    }
 
+      return { success: false, message, errors: null }
+    }
+    console.error(err)
     return {
-      sucess: false,
-      message: 'Unexpected error, try again in a few minutes',
+      success: false,
+      message: 'Unexpected error, try again in a few minutes.',
       errors: null,
     }
   }
 
-  return { sucess: true, message: null, errors: null }
+  return { success: true, message: null, errors: null }
 }
