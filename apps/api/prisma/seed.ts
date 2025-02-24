@@ -153,11 +153,11 @@ async function seed() {
           data: [
             {
               userId: user.id,
-              role: 'BILLING',
+              role: 'ADMIN',
             },
             {
               userId: anotherUser.id,
-              role: 'ADMIN',
+              role: 'BILLING',
             },
             {
               userId: anotherUser2.id,
