@@ -1,10 +1,3 @@
-import { Header } from '@/components/header'
-
 export default async function Home() {
-  return (
-    <div className="py-4">
-      <Header />
-      <main>alcuma coisa aqui no main</main>
-    </div>
-  )
+  return <main>alguma coisa aqui na home page</main>
 }
