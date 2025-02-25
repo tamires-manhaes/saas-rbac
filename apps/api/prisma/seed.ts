@@ -14,7 +14,7 @@ async function seed() {
     data: {
       name: 'Tamires Pimenta',
       email: 'tamires@email.com',
-      avatarUrl: 'https://github.com/diego3g.png',
+      avatarUrl: 'https://github.com/tamires-manhaes.png',
       passwordHash,
     },
   })
@@ -96,7 +96,7 @@ async function seed() {
             },
             {
               userId: anotherUser2.id,
-              role: 'MEMBER',
+              role: 'BILLING',
             },
           ],
         },
