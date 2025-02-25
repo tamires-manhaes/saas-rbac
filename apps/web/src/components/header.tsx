@@ -10,8 +10,6 @@ import { Separator } from './ui/separator'
 export async function Header() {
   const permissions = await ability()
 
-  console.log(permissions)
-
   return (
     <header className="mx-auto flex max-w-[1200px] items-center justify-between px-4">
       <div className="flex items-center gap-3">
