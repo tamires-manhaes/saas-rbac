@@ -6,6 +6,7 @@
     "db:seed": "pnpm env:load tsx --esm prisma/seed.ts",
     "db:migrate": "pnpm env:load prisma migrate dev",
     "db:studio": "pnpm env:load prisma studio",
+    "db:reset": "pnpm env:load prisma migrate reset --force --skip-seed",
     "env:load": "dotenv -e ../../.env --",
     "build": "tsup",
     "start": "node dist/http/server.js"
