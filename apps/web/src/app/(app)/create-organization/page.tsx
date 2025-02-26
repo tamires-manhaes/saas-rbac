@@ -1,10 +1,12 @@
+import Container from '@/components/container'
+
 import { OrganizationForm } from './organization-form'
 
-export default function CreateOrganizationPage() {
+export default function CreateOrganization() {
   return (
-    <div className="space-y-4">
+    <Container>
       <h1 className="text-2xl font-bold">Create organization</h1>
       <OrganizationForm />
-    </div>
+    </Container>
   )
 }
