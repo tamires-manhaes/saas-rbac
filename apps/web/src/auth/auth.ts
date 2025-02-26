@@ -11,29 +11,32 @@ export async function isAuthenticated() {
 }
 
 export async function getCurrentOrg() {
-  return (await cookies()).get('org')?.value ?? null
+  const cookieStore = await cookies()
+  return cookieStore.get('org')?.value ?? null
 }
 
 export async function getCurrentMembership() {
-  const currentOrg = await getCurrentOrg()
+  const org = await getCurrentOrg()
 
-  if (!currentOrg) {
+  if (!org) {
     return null
   }
 
-  const { memberhsip } = await getMembership(currentOrg)
-  return memberhsip
+  const { membership } = await getMembership(org)
+
+  return membership
 }
 
 export async function ability() {
   const membership = await getCurrentMembership()
+
   if (!membership) {
     return null
   }
 
   const ability = defineAbilityFor({
-    role: membership.role,
     id: membership.userId,
+    role: membership.role,
   })
 
   return ability
