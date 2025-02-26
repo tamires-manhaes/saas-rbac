@@ -1,10 +1,11 @@
+import Container from '@/components/container'
 import { Header } from '@/components/header'
 
 export default async function Projects() {
   return (
-    <div className="py-4">
+    <Container>
       <Header />
       <main>Org page/Projects</main>
-    </div>
+    </Container>
   )
 }
