@@ -2,11 +2,9 @@
   "name": "@saas/api",
   "version": "1.0.0",
   "scripts": {
-    "dev": "pnpm env:load tsx watch src/http/server.ts && node --max-old-space-size=4096",
-    "db:seed": "pnpm env:load tsx --esm prisma/seed.ts",
+    "dev": "pnpm env:load tsx watch src/http/server.ts",
     "db:migrate": "pnpm env:load prisma migrate dev",
     "db:studio": "pnpm env:load prisma studio",
-    "db:reset": "pnpm env:load prisma migrate reset --force --skip-seed",
     "env:load": "dotenv -e ../../.env --",
     "build": "tsup",
     "start": "node dist/http/server.js"
@@ -38,7 +36,7 @@
     "tsx": "^4.7.2"
   },
   "prisma": {
-    "seed": "pnpm env:load tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "prettier": "@saas/prettier",
   "eslintConfig": {
