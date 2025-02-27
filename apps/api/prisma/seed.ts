@@ -8,13 +8,13 @@ async function seed() {
   await prisma.organization.deleteMany()
   await prisma.user.deleteMany()
 
-  const passwordHash = await hash('senha@123', 1)
+  const passwordHash = await hash('123456', 1)
 
   const user = await prisma.user.create({
     data: {
-      name: 'Tamires Pimenta',
-      email: 'tamires@email.com',
-      avatarUrl: 'https://github.com/tamires-manhaes.png',
+      name: 'John Doe',
+      email: 'tamires@email',
+      avatarUrl: 'https://github.com/diego3g.png',
       passwordHash,
     },
   })
@@ -27,6 +27,7 @@ async function seed() {
       passwordHash,
     },
   })
+
   const anotherUser2 = await prisma.user.create({
     data: {
       name: faker.person.fullName(),
@@ -96,13 +97,14 @@ async function seed() {
             },
             {
               userId: anotherUser2.id,
-              role: 'BILLING',
+              role: 'MEMBER',
             },
           ],
         },
       },
     },
   })
+
   await prisma.organization.create({
     data: {
       name: 'Acme Inc (Billing)',
@@ -153,11 +155,11 @@ async function seed() {
           data: [
             {
               userId: user.id,
-              role: 'ADMIN',
+              role: 'BILLING',
             },
             {
               userId: anotherUser.id,
-              role: 'BILLING',
+              role: 'ADMIN',
             },
             {
               userId: anotherUser2.id,
@@ -168,6 +170,7 @@ async function seed() {
       },
     },
   })
+
   await prisma.organization.create({
     data: {
       name: 'Acme Inc (Member)',
@@ -236,5 +239,5 @@ async function seed() {
 }
 
 seed().then(() => {
-  console.log('DB seeded!')
+  console.log('Database seeded!')
 })
