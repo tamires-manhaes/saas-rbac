@@ -17,17 +17,19 @@ import {
 
 export async function OrganizationSwitcher() {
   const currentOrg = await getCurrentOrg()
+
   const { organizations } = await getOrganizations()
 
   const currentOrganization = organizations.find(
     (org) => org.slug === currentOrg,
   )
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="rouded flex w-[168px] items-center gap-2 p-1 text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary">
+      <DropdownMenuTrigger className="flex w-[168px] items-center gap-2 rounded p-1 text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary">
         {currentOrganization ? (
           <>
-            <Avatar className="mr-2 size-4">
+            <Avatar className="size-4">
               {currentOrganization.avatarUrl && (
                 <AvatarImage src={currentOrganization.avatarUrl} />
               )}
@@ -50,15 +52,17 @@ export async function OrganizationSwitcher() {
       >
         <DropdownMenuGroup>
           <DropdownMenuLabel>Organizations</DropdownMenuLabel>
-          {organizations.map((org) => {
+          {organizations.map((organization) => {
             return (
-              <DropdownMenuItem key={org.id} asChild>
-                <Link href={`/org/${org.slug}`}>
+              <DropdownMenuItem key={organization.id} asChild>
+                <Link href={`/org/${organization.slug}`}>
                   <Avatar className="mr-2 size-4">
-                    {org.avatarUrl && <AvatarImage src={org.avatarUrl} />}
+                    {organization.avatarUrl && (
+                      <AvatarImage src={organization.avatarUrl} />
+                    )}
                     <AvatarFallback />
                   </Avatar>
-                  <span className="line-clamp-1">{org.name}</span>
+                  <span className="line-clamp-1">{organization.name}</span>
                 </Link>
               </DropdownMenuItem>
             )
@@ -68,7 +72,7 @@ export async function OrganizationSwitcher() {
         <DropdownMenuItem asChild>
           <Link href="/create-organization">
             <PlusCircle className="mr-2 size-4" />
-            <span>Create new</span>
+            Create new
           </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
