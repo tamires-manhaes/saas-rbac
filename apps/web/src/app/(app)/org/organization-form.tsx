@@ -10,13 +10,24 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { useFormState } from '@/hooks/use-form-state'
 
-import { createOrganizationAction } from '../create-organization/actions'
+import { createOrganizationAction, updateOrganizationAction } from './actions'
+import { OrganizationSchema } from './schema'
 
-export function OrganizationForm() {
-  const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
-    createOrganizationAction,
-    () => {},
-  )
+interface OrganizationFormProps {
+  isUpdating?: boolean
+  initialData?: OrganizationSchema
+}
+
+export function OrganizationForm({
+  isUpdating = false,
+  initialData,
+}: OrganizationFormProps) {
+  const formAction = isUpdating
+    ? updateOrganizationAction
+    : createOrganizationAction
+  const [{ success, message, errors }, handleSubmit, isPending] =
+    useFormState(formAction)
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {success === false && message && (
@@ -38,15 +49,17 @@ export function OrganizationForm() {
           </AlertDescription>
         </Alert>
       )}
+
       <div className="space-y-1">
         <Label htmlFor="name">Org Name</Label>
-        <Input name="name" id="name" />
+        <Input name="name" id="name" defaultValue={initialData?.name} />
         {errors?.name && (
           <p className="text-xs font-medium text-red-500 dark:text-red-400">
             {errors.name[0]}
           </p>
         )}
       </div>
+
       <div className="space-y-1">
         <Label htmlFor="domain">E-mail Domain</Label>
         <Input
@@ -55,6 +68,7 @@ export function OrganizationForm() {
           id="domain"
           inputMode="url"
           placeholder="example.com"
+          defaultValue={initialData?.domain ?? undefined}
         />
         {errors?.domain && (
           <p className="text-xs font-medium text-red-500 dark:text-red-400">
@@ -62,12 +76,14 @@ export function OrganizationForm() {
           </p>
         )}
       </div>
+
       <div className="space-y-1">
         <div className="flex items-baseline space-x-2">
           <Checkbox
             name="shouldAttachUsersByDomain"
             id="shouldAttachUsersByDomain"
             className="translate-y-0.5"
+            defaultChecked={initialData?.shouldAttachUsersByDomain}
           />
           <label htmlFor="shouldAttachUsersByDomain" className="space-y-1">
             <span className="text-sm font-medium leading-none">
@@ -93,7 +109,6 @@ export function OrganizationForm() {
           'Save Organization'
         )}
       </Button>
-
       <Separator />
     </form>
   )
