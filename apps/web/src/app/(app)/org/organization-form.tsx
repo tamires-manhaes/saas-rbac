@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { useFormState } from '@/hooks/use-form-state'
 
-import { createOrganizationAction } from './actions'
+import { createOrganizationAction } from '../create-organization/actions'
 
 export function OrganizationForm() {
   const [{ success, message, errors }, handleSubmit, isPending] = useFormState(
