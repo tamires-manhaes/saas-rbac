@@ -80,7 +80,6 @@ export function ProjectSwitcher() {
           <DropdownMenuLabel>Projects</DropdownMenuLabel>
           {data &&
             data.projects.map((project) => {
-              console.log(project.name)
               return (
                 <DropdownMenuItem key={project.id} asChild>
                   <Link href={`/org/${orgSlug}/project/${project.slug}`}>
