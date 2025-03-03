@@ -1,5 +1,5 @@
 import { organizationSchema } from '@saas/auth'
-import { ArrowLeftRight, Crown } from 'lucide-react'
+import { ArrowLeftRight, Crown, UserMinus } from 'lucide-react'
 import Image from 'next/image'
 
 import { ability, getCurrentOrg } from '@/auth/auth'
@@ -9,6 +9,8 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { getMembers } from '@/http/get-members'
 import { getMembership } from '@/http/get-membership'
 import { getOrganization } from '@/http/get-organization'
+
+import { removeMemberAction } from './actions'
 
 export async function MemberList() {
   const currentOrg = await getCurrentOrg()
@@ -52,7 +54,7 @@ export async function MemberList() {
                         {member.name}
                         {member.userId === membership.userId && ' (me)'}
                         {organization.ownerId === member.userId && (
-                          <span className="items-centergap-1 inline-flex text-xs text-muted-foreground">
+                          <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                             <Crown className="size-3" />
                             owner
                           </span>
@@ -67,9 +69,26 @@ export async function MemberList() {
                     <div className="flex items-center justify-end gap-2">
                       {permissions?.can('transfer_ownership', authOrg) && (
                         <Button size="sm" variant="ghost">
-                          <ArrowLeftRight className="mr-2 size-4" />
-                          transfer ownership
+                          <ArrowLeftRight className="mr-1 size-4" />
+                          <span>transfer ownership</span>
                         </Button>
+                      )}
+
+                      {permissions?.can('delete', 'User') && (
+                        <form action={removeMemberAction.bind(null, member.id)}>
+                          <Button
+                            disabled={
+                              member.userId === membership.userId ||
+                              member.userId === organization.ownerId
+                            }
+                            type="submit"
+                            size="sm"
+                            variant="destructive"
+                          >
+                            <UserMinus className="mr-1 size-4" />
+                            <span>Remove</span>
+                          </Button>
+                        </form>
                       )}
                     </div>
                   </TableCell>
