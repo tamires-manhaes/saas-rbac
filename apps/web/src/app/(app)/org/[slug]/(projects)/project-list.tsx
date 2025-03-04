@@ -13,6 +13,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { getProjects } from '@/http/get-projects'
+import { dateFromDaysAgo } from '@/lib/date-from-days-ago'
 
 dayjs.extend(relativeTime)
 
@@ -44,7 +45,7 @@ export async function ProjectList() {
                 <span className="font-medium text-foreground">
                   {project.owner.name}
                 </span>{' '}
-                {dayjs(project.createdAt).fromNow()}
+                {dateFromDaysAgo(project.createdAt)}
               </span>
 
               <Button size="xs" variant="outline" className="ml-auto">
