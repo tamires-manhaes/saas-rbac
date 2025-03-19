@@ -12,13 +12,13 @@ export default async function Projects() {
 
   return (
     <div className="sapce-y-4">
-      <div className="flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between">
         <h1 className="text-1xl font-bold">Project list</h1>
 
         {permissions?.can('create', 'Project') && (
           <Button size="sm" asChild>
             <Link href={`/org/${currentOrg}/create-project`}>
-              <Plus className="mr-1 size-4" />
+              <Plus className="size-4" />
               <span>Create project</span>
             </Link>
           </Button>
