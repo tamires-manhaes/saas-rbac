@@ -14,7 +14,7 @@
     <img src="https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white" alt="react-query" />
     <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="Typescript" />
 </div>
-  <img src="https://github.com/tamires-manhaes/saas-rbac/blob/main/project.png" width="650" />
+  <img src="https://raw.githubusercontent.com/tamires-manhaes/saas-rbac/refs/heads/main/project.png" width="650" />
 </div>
 
 
